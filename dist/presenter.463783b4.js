@@ -119,12 +119,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"src/presenter.js":[function(require,module,exports) {
 var first = document.querySelector("#item");
+var precioXitem = document.querySelector("#precio");
 var form = document.querySelector("#Impuesto-form");
-var div = document.querySelector("#resultado-div");
+var div = document.querySelector("#resultadoItems-div");
+var div2 = document.querySelector("#resultadoPrecioXitem-div");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var firstNumber = Number.parseInt(first.value);
-  div.innerHTML = "<p>" + "Items" + firstNumber + "</p>";
+  div.innerHTML = "<p>" + "Items: " + firstNumber + "</p>";
+});
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  div2.innerHTML = "<p>" + "Precio por item: " + precioXitem.value + "</p>";
 });
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -151,7 +157,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52367" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52582" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
