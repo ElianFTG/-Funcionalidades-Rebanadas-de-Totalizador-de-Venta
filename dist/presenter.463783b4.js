@@ -136,23 +136,23 @@ function impuestosporEstado(estado) {
 }
 var _default = impuestosporEstado;
 exports.default = _default;
-},{}],"src/precioneto.js":[function(require,module,exports) {
+},{}],"src/multiplicacion.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
-function precioNeto(a, b) {
+function multiplicar(a, b) {
   return a * b;
 }
-var _default = precioNeto;
+var _default = multiplicar;
 exports.default = _default;
 },{}],"src/presenter.js":[function(require,module,exports) {
 "use strict";
 
 var _impuestoXestado = _interopRequireDefault(require("./impuestoXestado"));
-var _precioneto = _interopRequireDefault(require("./precioneto"));
+var _multiplicacion = _interopRequireDefault(require("./multiplicacion"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var first = document.querySelector("#item");
 var precioXitem = document.querySelector("#precio");
@@ -162,6 +162,7 @@ var div = document.querySelector("#resultadoItems-div");
 var div2 = document.querySelector("#resultadoPrecioXitem-div");
 var div3 = document.querySelector("#EstadoElegido-div");
 var div4 = document.querySelector("#PrecioNeto-div");
+var div5 = document.querySelector("#ImpuestoXPN-div");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var firstNumber = Number.parseInt(first.value);
@@ -177,9 +178,16 @@ form.addEventListener("submit", function (event) {
 });
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  div4.innerHTML = "<p>" + "Precio Neto: " + (0, _precioneto.default)(first.value, precioXitem.value) + "</p>";
+  var precioNeto = (0, _multiplicacion.default)(first.value, precioXitem.value);
+  var Impuesto_estado = (0, _impuestoXestado.default)(estado.value);
+  var impuestoTotal = (0, _multiplicacion.default)(precioNeto, Impuesto_estado);
+  div4.innerHTML = "<p>" + "Precio Neto (" + first.value + "*" + "$" + precioXitem.value + "): " + "$" + precioNeto + "</p>";
+  div5.innerHTML = "<p>" + "Impuesto para " + estado.value + "(%" + Impuesto_estado * 100 + "): " + "$" + impuestoTotal + "</p>";
 });
-},{"./impuestoXestado":"src/impuestoXestado.js","./precioneto":"src/precioneto.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+});
+},{"./impuestoXestado":"src/impuestoXestado.js","./multiplicacion":"src/multiplicacion.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -204,7 +212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52938" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53095" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
