@@ -117,7 +117,30 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"src/presenter.js":[function(require,module,exports) {
+})({"src/impuestoXestado.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+function impuestosporEstado(estado) {
+  var impuestosXEstados = {
+    "UT": 6.65 / 100,
+    "NV": 8 / 100,
+    "TX": 6.25 / 100,
+    "AL": 4 / 100,
+    "CA": 8.25 / 100
+  };
+  return impuestosXEstados[estado];
+}
+var _default = impuestosporEstado;
+exports.default = _default;
+},{}],"src/presenter.js":[function(require,module,exports) {
+"use strict";
+
+var _impuestoXestado = _interopRequireDefault(require("./impuestoXestado"));
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var first = document.querySelector("#item");
 var precioXitem = document.querySelector("#precio");
 var estado = document.querySelector("#Estado");
@@ -136,9 +159,9 @@ form.addEventListener("submit", function (event) {
 });
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  div3.innerHTML = "<p>" + "Estado: " + estado.value + "</p>";
+  div3.innerHTML = "<p>" + "Estado: " + estado.value + " Porcentaje de impuesto: " + (0, _impuestoXestado.default)(estado.value) * 100 + "%" + "</p>";
 });
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./impuestoXestado":"src/impuestoXestado.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -163,7 +186,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52676" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52815" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

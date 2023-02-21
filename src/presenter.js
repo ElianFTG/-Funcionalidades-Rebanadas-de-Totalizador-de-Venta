@@ -1,3 +1,5 @@
+import impuestosporEstado from "./impuestoXestado";
+
 const first = document.querySelector("#item");
 const precioXitem = document.querySelector("#precio");
 const estado = document.querySelector("#Estado");
@@ -23,5 +25,5 @@ form.addEventListener("submit", (event) => {
 form.addEventListener("submit", (event) => {
     event.preventDefault();
   
-    div3.innerHTML = "<p>" + "Estado: " + estado.value + "</p>";
+    div3.innerHTML = "<p>" + "Estado: " + estado.value + " Porcentaje de impuesto: " + impuestosporEstado(estado.value)*100+ "%" +"</p>";
 });
