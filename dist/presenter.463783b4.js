@@ -136,10 +136,23 @@ function impuestosporEstado(estado) {
 }
 var _default = impuestosporEstado;
 exports.default = _default;
+},{}],"src/precioneto.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+function precioNeto(a, b) {
+  return a * b;
+}
+var _default = precioNeto;
+exports.default = _default;
 },{}],"src/presenter.js":[function(require,module,exports) {
 "use strict";
 
 var _impuestoXestado = _interopRequireDefault(require("./impuestoXestado"));
+var _precioneto = _interopRequireDefault(require("./precioneto"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 var first = document.querySelector("#item");
 var precioXitem = document.querySelector("#precio");
@@ -148,6 +161,7 @@ var form = document.querySelector("#Impuesto-form");
 var div = document.querySelector("#resultadoItems-div");
 var div2 = document.querySelector("#resultadoPrecioXitem-div");
 var div3 = document.querySelector("#EstadoElegido-div");
+var div4 = document.querySelector("#PrecioNeto-div");
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   var firstNumber = Number.parseInt(first.value);
@@ -161,7 +175,11 @@ form.addEventListener("submit", function (event) {
   event.preventDefault();
   div3.innerHTML = "<p>" + "Estado: " + estado.value + " Porcentaje de impuesto: " + (0, _impuestoXestado.default)(estado.value) * 100 + "%" + "</p>";
 });
-},{"./impuestoXestado":"src/impuestoXestado.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  div4.innerHTML = "<p>" + "Precio Neto: " + (0, _precioneto.default)(first.value, precioXitem.value) + "</p>";
+});
+},{"./impuestoXestado":"src/impuestoXestado.js","./precioneto":"src/precioneto.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -186,7 +204,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52815" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52938" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
