@@ -1,5 +1,6 @@
 import impuestosporEstado from "./impuestoXestado";
 import multiplicar from "./multiplicacion";
+import descuento from "./descuentos";
 
 const first = document.querySelector("#item");
 const precioXitem = document.querySelector("#precio");
@@ -10,6 +11,8 @@ const div2 = document.querySelector("#resultadoPrecioXitem-div");
 const div3 = document.querySelector("#EstadoElegido-div");
 const div4 = document.querySelector("#PrecioNeto-div");
 const div5 = document.querySelector("#ImpuestoXPN-div");
+const div6 = document.querySelector("#Descuento-div");
+const div7 = document.querySelector("#PrecioTotal-div");
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -33,6 +36,13 @@ form.addEventListener("submit", (event) => {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+  
+    div3.innerHTML = "<p>" + "Estado: " + estado.value + " Porcentaje de impuesto: " + impuestosporEstado(estado.value)*100+ "%" +"</p>";
+});
+
+
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
     const precioNeto = multiplicar(first.value, precioXitem.value);
     const Impuesto_estado = impuestosporEstado(estado.value);
     const impuestoTotal = multiplicar(precioNeto, Impuesto_estado);
@@ -42,5 +52,6 @@ form.addEventListener("submit", (event) => {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    
+  
+    div6.innerHTML = "<p>" + "Descuento: " + descuento(1)*100 +"</p>";
 });
