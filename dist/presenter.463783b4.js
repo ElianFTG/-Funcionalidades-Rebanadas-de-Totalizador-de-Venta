@@ -132,7 +132,7 @@ function impuestosporEstado(estado) {
     "AL": 4 / 100,
     "CA": 8.25 / 100
   };
-  return impuestosXEstados[estado];
+  return Number.parseFloat(impuestosXEstados[estado]);
 }
 var _default = impuestosporEstado;
 exports.default = _default;
@@ -144,7 +144,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 function multiplicar(a, b) {
-  return a * b;
+  return Number.parseFloat(a * b);
 }
 var _default = multiplicar;
 exports.default = _default;
@@ -181,6 +181,7 @@ var _impuestoXestado = _interopRequireDefault(require("./impuestoXestado"));
 var _multiplicacion = _interopRequireDefault(require("./multiplicacion"));
 var _descuentos = _interopRequireDefault(require("./descuentos"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 var first = document.querySelector("#item");
 var precioXitem = document.querySelector("#precio");
 var estado = document.querySelector("#Estado");
@@ -211,15 +212,24 @@ form.addEventListener("submit", function (event) {
 });
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-  var precioNeto = (0, _multiplicacion.default)(first.value, precioXitem.value);
-  var Impuesto_estado = (0, _impuestoXestado.default)(estado.value);
-  var impuestoTotal = (0, _multiplicacion.default)(precioNeto, Impuesto_estado);
+  var precioNeto = Number.parseFloat((0, _multiplicacion.default)(first.value, precioXitem.value));
+  var Impuesto_estado = Number.parseFloat((0, _impuestoXestado.default)(estado.value));
+  var impuestoTotal = Number.parseFloat((0, _multiplicacion.default)(precioNeto, Impuesto_estado));
+  var descuentoImpuesto = Number.parseFloat((0, _descuentos.default)(impuestoTotal));
+  var descuentoImpuestoTotal = Number.parseFloat((0, _multiplicacion.default)(descuentoImpuesto, impuestoTotal));
+  var PrecioTotal = precioNeto + impuestoTotal - descuentoImpuestoTotal;
+  console.log('asdas', precioNeto);
+  console.log('asdas', impuestoTotal.toFixed(2));
+  console.log('asdas', descuentoImpuestoTotal.toFixed(2));
+  console.log('asdas', PrecioTotal);
+  console.log('precioNeto', _typeof(precioNeto));
+  console.log('impuestoTotal', _typeof(impuestoTotal.toFixed(2)));
+  console.log('descuentoImpuestoTota', _typeof(descuentoImpuestoTotal.toFixed(2)));
+  console.log('PrecioTotal', _typeof(PrecioTotal));
   div4.innerHTML = "<p>" + "Precio Neto (" + first.value + "*" + "$" + precioXitem.value + "): " + "$" + precioNeto + "</p>";
   div5.innerHTML = "<p>" + "Impuesto para " + estado.value + "(%" + Impuesto_estado * 100 + "): " + "$" + impuestoTotal + "</p>";
-});
-form.addEventListener("submit", function (event) {
-  event.preventDefault();
-  div6.innerHTML = "<p>" + "Descuento: " + (0, _descuentos.default)(1) * 100 + "</p>";
+  div6.innerHTML = "<p>" + "Descuento (" + descuentoImpuesto.toFixed(2) * 100 + "%): " + descuentoImpuestoTotal.toFixed(2) + "</p>";
+  div7.innerHTML = "<p>" + "Precio total (descuento e impuesto): " + "$" + PrecioTotal.toFixed(2) + "</p>";
 });
 },{"./impuestoXestado":"src/impuestoXestado.js","./multiplicacion":"src/multiplicacion.js","./descuentos":"src/descuentos.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -246,7 +256,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53327" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54905" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

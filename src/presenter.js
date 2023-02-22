@@ -43,15 +43,22 @@ form.addEventListener("submit", (event) => {
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
-    const precioNeto = multiplicar(first.value, precioXitem.value);
-    const Impuesto_estado = impuestosporEstado(estado.value);
-    const impuestoTotal = multiplicar(precioNeto, Impuesto_estado);
+    const precioNeto = Number.parseFloat(multiplicar(first.value, precioXitem.value));
+    const Impuesto_estado = Number.parseFloat(impuestosporEstado(estado.value));
+    const impuestoTotal = Number.parseFloat((multiplicar(precioNeto, Impuesto_estado)));
+    const descuentoImpuesto = Number.parseFloat(descuento(impuestoTotal));
+    const descuentoImpuestoTotal = Number.parseFloat(multiplicar(descuentoImpuesto, impuestoTotal));
+    const PrecioTotal = precioNeto + impuestoTotal - descuentoImpuestoTotal;
+    console.log('asdas', precioNeto);
+    console.log('asdas', impuestoTotal.toFixed(2));
+    console.log('asdas', descuentoImpuestoTotal.toFixed(2));
+    console.log('asdas', PrecioTotal);
+    console.log('precioNeto', typeof precioNeto);
+    console.log('impuestoTotal', typeof impuestoTotal.toFixed(2));
+    console.log('descuentoImpuestoTota', typeof descuentoImpuestoTotal.toFixed(2));
+    console.log('PrecioTotal', typeof PrecioTotal);
     div4.innerHTML = "<p>" + "Precio Neto (" + first.value + "*" +"$" + precioXitem.value + "): " + "$" + precioNeto +"</p>";
     div5.innerHTML = "<p>" + "Impuesto para "+ estado.value + "(%" + Impuesto_estado*100 + "): " + "$" + impuestoTotal +"</p>";
-});
-
-form.addEventListener("submit", (event) => {
-    event.preventDefault();
-  
-    div6.innerHTML = "<p>" + "Descuento: " + descuento(1)*100 +"</p>";
+    div6.innerHTML = "<p>" + "Descuento (" + descuentoImpuesto.toFixed(2)*100 + "%): " + descuentoImpuestoTotal.toFixed(2) +"</p>";
+    div7.innerHTML = "<p>" + "Precio total (descuento e impuesto): " + "$" + PrecioTotal.toFixed(2) +  "</p>";
 });

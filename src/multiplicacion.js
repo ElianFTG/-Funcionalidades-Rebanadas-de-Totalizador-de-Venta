@@ -1,5 +1,5 @@
 function multiplicar(a, b) {
-    return a * b;
+    return Number.parseFloat(a * b);
   }
   
   export default multiplicar;
